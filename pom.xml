@@ -73,13 +73,6 @@
       <version>5.2.3</version>
     </dependency>
 
-
-
-
-
-
-
-
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>json-schema-validator</artifactId>

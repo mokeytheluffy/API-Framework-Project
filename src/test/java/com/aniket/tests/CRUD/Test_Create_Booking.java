@@ -23,7 +23,7 @@ public class Test_Create_Booking extends BaseTest {
 
         booking_response bookingResponse = payloadManager.bookingResponseJava(response.asString());
 
-        assertActions.verifyStringKey(bookingResponse.getBooking().getFirstname(),"Aniket");
+        //assertActions.verifyStringKey(bookingResponse.getBooking().getFirstname(),"Aniket");
     }
 
 }

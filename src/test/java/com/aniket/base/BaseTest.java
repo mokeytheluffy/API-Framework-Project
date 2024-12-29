@@ -23,18 +23,30 @@ public class BaseTest {
     public ValidatableResponse validatableResponse;
     public Response response;
 
-@BeforeTest
+    @BeforeTest
     public void setUp() {
-    //Base URL , Content type JSON
+        //Base URL , Content type JSON
 
-    payloadManager = new PayloadManager();
-    assertActions = new AssertActions();
-   // requestSpecification = RestAssured.given().baseUri(APIConstants.BASE_URL).contentType(ContentType.JSON).log().all();
+        payloadManager = new PayloadManager();
+        assertActions = new AssertActions();
+        // requestSpecification = RestAssured.given().baseUri(APIConstants.BASE_URL).contentType(ContentType.JSON).log().all();
 // above was the one way and below is the other way ---- both of them we can use
-    requestSpecification = new RequestSpecBuilder().setBaseUri(APIConstants.BASE_URL).addHeader("Content-Type", "application/json").build().log().all();
+        requestSpecification = new RequestSpecBuilder().setBaseUri(APIConstants.BASE_URL).addHeader("Content-Type", "application/json").build().log().all();
 
 
-}
+    }
+
+    public String get_token() {
+        requestSpecification = RestAssured.given().baseUri(APIConstants.BASE_URL).basePath(APIConstants.AUTH_URL);
+
+//Setting the payload
+        String payload = payloadManager.SetAuthPayload();
 
 
+//Get the Token
+        response = requestSpecification.contentType(ContentType.JSON).body(payload).when().post();
+        String token = payloadManager.getToken(response.asString());
+        return token;
+
+    }
 }
